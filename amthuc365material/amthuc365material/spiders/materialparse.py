@@ -14,7 +14,7 @@ class AmthucparseSpider(scrapy.Spider):
         'http://www.amthuc365.vn/',
     )
     def parse(self, response):
-        self.conn=MySQLdb.connect(user='root',passwd='',db='amthuc365',host='127.0.0.1',charset="utf8",use_unicode='True')
+        self.conn=MySQLdb.connect(user='root',passwd='cobala15111994',db='amthuc365',host='127.0.0.1',charset="utf8",use_unicode='True')
         self.cursor=self.conn.cursor()
         sql = "SELECT * FROM dish_material"
         try:
@@ -23,7 +23,7 @@ class AmthucparseSpider(scrapy.Spider):
            # Fetch all the rows in a list of lists.
            results = self.cursor.fetchall()
            for row in results:
-				link = row[4]
+				link = row[0]
 				request = Request(link, callback=self.parse_item)
 				request.meta['url'] = link
 				yield request
@@ -31,11 +31,11 @@ class AmthucparseSpider(scrapy.Spider):
            print "Error: unable to fecth data"
 
     def parse_item(self, response):
-        for sel in response.xpath('//html/body/div[@id="container"]/div[@class="body-recipe recipe"]'):
+        for sel in response.xpath('//div[@class="recipe_component"]/ul[@class="recipe_component_list"]/li'):
             item = Amthuc365MaterialItem()
             item['link'] = response.meta['url']
         	# material
-            material = sel.xpath('//div[@class="recipe_component"]/ul[@class="recipe_component_list"]/li/span[@class="ingredient"]/span[@class="name"]/a/text()').extract()
+            material = sel.xpath('span[@class="ingredient"]/span[@class="name"]/a/text()').extract()
             if material:
                 material = material[0].encode('utf-8')
                 material = material.strip()
@@ -44,7 +44,7 @@ class AmthucparseSpider(scrapy.Spider):
                 item['material'] = ''
 
             #value
-            value = sel.xpath('//div[@class="recipe_component"]/ul[@class="recipe_component_list"]/li/span[@class="ingredient"]/<span[@class="amount"]/span[@class="value"]/text()').extract()
+            value = sel.xpath('span[@class="ingredient"]/span[@class="amount"]/span[@class="value"]/text()').extract()
             if value:
                 value = value[0].encode('utf-8')
                 value = value.strip()
@@ -53,7 +53,7 @@ class AmthucparseSpider(scrapy.Spider):
                 item['value'] = ''
 
             # type
-            mytype = sel.xpath('//div[@class="recipe_component"]/ul[@class="recipe_component_list"]/li/span[@class="ingredient"]/<span[@class="amount"]/span[@class="type"]/text()').extract()
+            mytype = sel.xpath('span[@class="ingredient"]/span[@class="amount"]/span[@class="type"]/text()').extract()
 
             if mytype:
                 mytype = mytype[0].encode('utf-8')

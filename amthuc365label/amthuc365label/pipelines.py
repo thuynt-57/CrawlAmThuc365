@@ -4,9 +4,9 @@
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
-import MySQLdb
 
-class Amthuc365MaterialPipeline(object):
+
+class Amthuc365LabelPipeline(object):
     def __init__(self):
     # sua ten database
         self.conn=MySQLdb.connect(user='root',passwd='cobala15111994',db='amthuc365',host='127.0.0.1',charset="utf8",use_unicode='True')

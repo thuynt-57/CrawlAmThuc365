@@ -8,10 +8,7 @@
 import scrapy
 
 
-class Amthuc365MaterialItem(scrapy.Item):
+class Amthuc365LabelItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    link = scrapy.Field()
-    material = scrapy.Field()
-    value = scrapy.Field()
-    mytype = scrapy.Field()
+    pass
