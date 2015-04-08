@@ -4,11 +4,11 @@ import scrapy
 import datetime
 from scrapy.http import Request, FormRequest
 from scrapy.selector import Selector
-from amthuc365material.items import Amthuc365MaterialItem
+from amthuc365label.items import Amthuc365LabelItem
 
 
 class Amthuc365getterSpider(scrapy.Spider):
-    name = "getlink2"
+    name = "getlink"
     allowed_domains = ["amthuc365.vn"]
     start_urls = (
         'http://www.amthuc365.vn',
@@ -50,6 +50,6 @@ class Amthuc365getterSpider(scrapy.Spider):
             yield request
 
             for i in range(len(product_link)):
-                item = Amthuc365MaterialItem()
+                item = Amthuc365LabelItem()
                 item['link'] = self.start_urls[0] + product_link[i]
                 yield item

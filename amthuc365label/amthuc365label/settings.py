@@ -14,7 +14,7 @@ SPIDER_MODULES = ['amthuc365label.spiders']
 NEWSPIDER_MODULE = 'amthuc365label.spiders'
 
 ITEM_PIPELINES = {
-    'amthucLabel.pipelines.Amthuc365LabelPipeline':800,
+    'amthuc365label.pipelines.Amthuc365LabelPipeline':800,
 }
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent

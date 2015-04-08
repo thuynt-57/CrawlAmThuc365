@@ -11,4 +11,5 @@ import scrapy
 class Amthuc365LabelItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    pass
+    link = scrapy.Field()
+    label = scrapy.Field()

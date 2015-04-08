@@ -16,7 +16,7 @@ class Amthuc365MaterialPipeline(object):
         if (spider.name == 'getlink2'):
             try:
                 # sua lai lenh insert cho phu hop voi database
-                sql = """INSERT INTO dish_material(link) VALUES (\'%s\')""" %(''.join(item['link']).decode('utf-8'))
+                sql = """INSERT INTO dish_material(link) VALUES (\'%s\')""" %(''.join(dishes(link)).decode('utf-8'))
                 self.cursor.execute(sql)
                 self.conn.commit()
             except MySQLdb.Error, e:
